@@ -2,18 +2,16 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTodoInput = {
+export type CreateTweetInput = {
   id?: string | null,
-  name: string,
-  description?: string | null,
+  content: string,
 };
 
-export type ModelTodoConditionInput = {
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoConditionInput | null > | null,
-  or?: Array< ModelTodoConditionInput | null > | null,
-  not?: ModelTodoConditionInput | null,
+export type ModelTweetConditionInput = {
+  content?: ModelStringInput | null,
+  and?: Array< ModelTweetConditionInput | null > | null,
+  or?: Array< ModelTweetConditionInput | null > | null,
+  not?: ModelTweetConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -56,32 +54,29 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Todo = {
-  __typename: "Todo",
+export type Tweet = {
+  __typename: "Tweet",
   id: string,
-  name: string,
-  description?: string | null,
+  content: string,
   createdAt: string,
   updatedAt: string,
 };
 
-export type UpdateTodoInput = {
+export type UpdateTweetInput = {
   id: string,
-  name?: string | null,
-  description?: string | null,
+  content?: string | null,
 };
 
-export type DeleteTodoInput = {
+export type DeleteTweetInput = {
   id: string,
 };
 
-export type ModelTodoFilterInput = {
+export type ModelTweetFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
+  content?: ModelStringInput | null,
+  and?: Array< ModelTweetFilterInput | null > | null,
+  or?: Array< ModelTweetFilterInput | null > | null,
+  not?: ModelTweetFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -100,89 +95,84 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelTodoConnection = {
-  __typename: "ModelTodoConnection",
-  items:  Array<Todo | null >,
+export type ModelTweetConnection = {
+  __typename: "ModelTweetConnection",
+  items:  Array<Tweet | null >,
   nextToken?: string | null,
 };
 
-export type CreateTodoMutationVariables = {
-  input: CreateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type CreateTweetMutationVariables = {
+  input: CreateTweetInput,
+  condition?: ModelTweetConditionInput | null,
 };
 
-export type CreateTodoMutation = {
-  createTodo?:  {
-    __typename: "Todo",
+export type CreateTweetMutation = {
+  createTweet?:  {
+    __typename: "Tweet",
     id: string,
-    name: string,
-    description?: string | null,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type UpdateTodoMutationVariables = {
-  input: UpdateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type UpdateTweetMutationVariables = {
+  input: UpdateTweetInput,
+  condition?: ModelTweetConditionInput | null,
 };
 
-export type UpdateTodoMutation = {
-  updateTodo?:  {
-    __typename: "Todo",
+export type UpdateTweetMutation = {
+  updateTweet?:  {
+    __typename: "Tweet",
     id: string,
-    name: string,
-    description?: string | null,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type DeleteTodoMutationVariables = {
-  input: DeleteTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type DeleteTweetMutationVariables = {
+  input: DeleteTweetInput,
+  condition?: ModelTweetConditionInput | null,
 };
 
-export type DeleteTodoMutation = {
-  deleteTodo?:  {
-    __typename: "Todo",
+export type DeleteTweetMutation = {
+  deleteTweet?:  {
+    __typename: "Tweet",
     id: string,
-    name: string,
-    description?: string | null,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type GetTodoQueryVariables = {
+export type GetTweetQueryVariables = {
   id: string,
 };
 
-export type GetTodoQuery = {
-  getTodo?:  {
-    __typename: "Todo",
+export type GetTweetQuery = {
+  getTweet?:  {
+    __typename: "Tweet",
     id: string,
-    name: string,
-    description?: string | null,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListTodosQueryVariables = {
-  filter?: ModelTodoFilterInput | null,
+export type ListTweetsQueryVariables = {
+  filter?: ModelTweetFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListTodosQuery = {
-  listTodos?:  {
-    __typename: "ModelTodoConnection",
+export type ListTweetsQuery = {
+  listTweets?:  {
+    __typename: "ModelTweetConnection",
     items:  Array< {
-      __typename: "Todo",
+      __typename: "Tweet",
       id: string,
-      name: string,
-      description?: string | null,
+      content: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -190,34 +180,31 @@ export type ListTodosQuery = {
   } | null,
 };
 
-export type OnCreateTodoSubscription = {
-  onCreateTodo?:  {
-    __typename: "Todo",
+export type OnCreateTweetSubscription = {
+  onCreateTweet?:  {
+    __typename: "Tweet",
     id: string,
-    name: string,
-    description?: string | null,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnUpdateTodoSubscription = {
-  onUpdateTodo?:  {
-    __typename: "Todo",
+export type OnUpdateTweetSubscription = {
+  onUpdateTweet?:  {
+    __typename: "Tweet",
     id: string,
-    name: string,
-    description?: string | null,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnDeleteTodoSubscription = {
-  onDeleteTodo?:  {
-    __typename: "Todo",
+export type OnDeleteTweetSubscription = {
+  onDeleteTweet?:  {
+    __typename: "Tweet",
     id: string,
-    name: string,
-    description?: string | null,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
