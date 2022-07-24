@@ -10,6 +10,14 @@
       "StackName": "amplify-twitterclone-dev-185103",
       "StackId": "arn:aws:cloudformation:ap-northeast-1:885538921447:stack/amplify-twitterclone-dev-185103/22158a90-0b36-11ed-868b-062790f60ad9",
       "AmplifyAppId": "d2sf614ei0yynq"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2sf614ei0yynq",
+          "type": "cicd"
+        }
+      }
     }
   }
 }
