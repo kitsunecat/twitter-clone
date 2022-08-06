@@ -101,6 +101,43 @@ export type ModelTweetConnection = {
   nextToken?: string | null,
 };
 
+export type ModelSubscriptionTweetFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  content?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionTweetFilterInput | null > | null,
+  or?: Array< ModelSubscriptionTweetFilterInput | null > | null,
+};
+
+export type ModelSubscriptionIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
 export type CreateTweetMutationVariables = {
   input: CreateTweetInput,
   condition?: ModelTweetConditionInput | null,
@@ -180,6 +217,10 @@ export type ListTweetsQuery = {
   } | null,
 };
 
+export type OnCreateTweetSubscriptionVariables = {
+  filter?: ModelSubscriptionTweetFilterInput | null,
+};
+
 export type OnCreateTweetSubscription = {
   onCreateTweet?:  {
     __typename: "Tweet",
@@ -190,6 +231,10 @@ export type OnCreateTweetSubscription = {
   } | null,
 };
 
+export type OnUpdateTweetSubscriptionVariables = {
+  filter?: ModelSubscriptionTweetFilterInput | null,
+};
+
 export type OnUpdateTweetSubscription = {
   onUpdateTweet?:  {
     __typename: "Tweet",
@@ -198,6 +243,10 @@ export type OnUpdateTweetSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type OnDeleteTweetSubscriptionVariables = {
+  filter?: ModelSubscriptionTweetFilterInput | null,
 };
 
 export type OnDeleteTweetSubscription = {

@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateTweet = /* GraphQL */ `
-  subscription OnCreateTweet {
-    onCreateTweet {
+  subscription OnCreateTweet($filter: ModelSubscriptionTweetFilterInput) {
+    onCreateTweet(filter: $filter) {
       id
       content
       createdAt
@@ -13,8 +13,8 @@ export const onCreateTweet = /* GraphQL */ `
   }
 `;
 export const onUpdateTweet = /* GraphQL */ `
-  subscription OnUpdateTweet {
-    onUpdateTweet {
+  subscription OnUpdateTweet($filter: ModelSubscriptionTweetFilterInput) {
+    onUpdateTweet(filter: $filter) {
       id
       content
       createdAt
@@ -23,8 +23,8 @@ export const onUpdateTweet = /* GraphQL */ `
   }
 `;
 export const onDeleteTweet = /* GraphQL */ `
-  subscription OnDeleteTweet {
-    onDeleteTweet {
+  subscription OnDeleteTweet($filter: ModelSubscriptionTweetFilterInput) {
+    onDeleteTweet(filter: $filter) {
       id
       content
       createdAt
