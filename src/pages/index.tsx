@@ -13,9 +13,6 @@ Amplify.configure(awsconfig);
 import { createTweet, deleteTweet } from '../graphql/mutations';
 import { listTweets } from '../graphql/queries';
 
-// Amplify Auth
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
 
 
 type Tweet = {
@@ -25,7 +22,7 @@ type Tweet = {
   updatedAt: String
 }
 
-const Home: NextPage = ({ signOut, user }) => {
+const Home: NextPage = () => {
   const [tweets, setTweets] = useState<Tweet[]>([])
   const [newTweet, setNewTweet] = useState<String>("")
 
@@ -54,10 +51,6 @@ const Home: NextPage = ({ signOut, user }) => {
 
   return (
     <div>
-      <h1>Hello {user.attributes.email}</h1>
-      <div>
-        <button onClick={signOut}>Sign out</button>
-      </div>
       <input type="text" onChange={(e) => setNewTweet(e.target.value)} />
       <button onClick={() => createTweetHandler()}>submit</button>
 
@@ -76,4 +69,4 @@ const Home: NextPage = ({ signOut, user }) => {
   )
 }
 
-export default withAuthenticator(Home)
+export default Home
