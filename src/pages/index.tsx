@@ -1,18 +1,17 @@
 // Next.js
 import type { NextPage } from 'next'
 
+// React
+import { useEffect, useState } from 'react';
+
 // Amplify
 import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import awsconfig from '../aws-exports';
+Amplify.configure(awsconfig);
 
 // Amplify GraphQL
 import { createTweet, deleteTweet } from '../graphql/mutations';
 import { listTweets } from '../graphql/queries';
-import { onCreateTweet } from '../graphql/subscriptions';
-
-
-import { useEffect, useState } from 'react';
-import awsconfig from '../aws-exports';
-Amplify.configure(awsconfig);
 
 type Tweet = {
   content: String
