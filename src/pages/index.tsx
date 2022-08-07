@@ -5,42 +5,36 @@ import type { NextPage } from 'next'
 import { useEffect, useState } from 'react';
 
 // Amplify
-import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import { Amplify } from 'aws-amplify';
 import awsconfig from '../aws-exports';
 Amplify.configure(awsconfig);
 
-// Amplify GraphQL
-import { createTweet, deleteTweet } from '../graphql/mutations';
-import { listTweets } from '../graphql/queries';
-
-type Tweet = {
-  content: String
-  createdAt: String
-  id: String
-  updatedAt: String
-}
+// Amplify DataStore
+import { DataStore } from '@aws-amplify/datastore';
+import { Tweet } from '../models';
 
 const Home: NextPage = () => {
   const [tweets, setTweets] = useState<Tweet[]>([])
-  const [newTweet, setNewTweet] = useState<String>("")
+  const [newTweet, setNewTweet] = useState<string>("")
 
   const getTweets = async () => {
-    const tweets = await API.graphql(graphqlOperation(listTweets))
-    // @ts-ignore
-    setTweets(tweets.data.listTweets.items)
+    const models = await DataStore.query(Tweet);
+    setTweets(models)
   }
 
   const createTweetHandler = async () => {
-    const result = await API.graphql(graphqlOperation(createTweet, { input: { content: newTweet } }))
-    // @ts-ignore
-    setTweets([...tweets, result.data.createTweet])
+    const tweet = await DataStore.save(
+      new Tweet({ "content": newTweet })
+    );
     setNewTweet('')
+    setTweets([...tweets, tweet])
   }
 
-  const deleteTweetHandler = async (tweetId: String) => {
-    await API.graphql(graphqlOperation(deleteTweet, { input: { id: tweetId } }))
-    // @ts-ignore
-    setTweets(tweets.filter(t => t.id !== tweetId))
+  const deleteTweetHandler = async (tweetId: string) => {
+    const models = await DataStore.query(Tweet);
+    const modelToDelete = models.find(i => i.id === tweetId)
+    if (modelToDelete) DataStore.delete(modelToDelete);
+    setTweets(models.filter(t => t.id !== tweetId))
   }
 
   useEffect(() => {
@@ -49,7 +43,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <input type="text" onChange={(e) => setNewTweet(e.target.value)} />
+      <input type="text" value={newTweet} onChange={(e) => setNewTweet(e.target.value)} />
       <button onClick={() => createTweetHandler()}>submit</button>
 
       {tweets.map((tweet) => (
