@@ -13,8 +13,6 @@ Amplify.configure(awsconfig);
 import { createTweet, deleteTweet } from '../graphql/mutations';
 import { listTweets } from '../graphql/queries';
 
-
-
 type Tweet = {
   content: String
   createdAt: String
@@ -39,7 +37,7 @@ const Home: NextPage = () => {
     setNewTweet('')
   }
 
-  const deleteTweetHandler = async (tweetId: string) => {
+  const deleteTweetHandler = async (tweetId: String) => {
     await API.graphql(graphqlOperation(deleteTweet, { input: { id: tweetId } }))
     // @ts-ignore
     setTweets(tweets.filter(t => t.id !== tweetId))
