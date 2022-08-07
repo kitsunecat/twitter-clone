@@ -32,5 +32,29 @@
         }
       }
     }
+  },
+  "develop": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-twitterclone-develop-145904-authRole",
+      "UnauthRoleArn": "arn:aws:iam::885538921447:role/amplify-twitterclone-develop-145904-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::885538921447:role/amplify-twitterclone-develop-145904-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-twitterclone-develop-145904-deployment",
+      "UnauthRoleName": "amplify-twitterclone-develop-145904-unauthRole",
+      "StackName": "amplify-twitterclone-develop-145904",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:885538921447:stack/amplify-twitterclone-develop-145904/e157aa30-154c-11ed-8939-062307a5ffb3",
+      "AmplifyAppId": "d26lh2a4bqlgub"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d26lh2a4bqlgub",
+          "type": "cicd"
+        }
+      },
+      "auth": {
+        "twitterclone353fc1de": {}
+      }
+    }
   }
 }
