@@ -42,12 +42,15 @@ const Home: NextPage = () => {
   }, [])
 
   return (
-    <div>
+    <div className="w-full lg:w-1/2 bg-white mb-4">
       <input type="text" value={newTweet} onChange={(e) => setNewTweet(e.target.value)} />
       <button onClick={() => createTweetHandler()}>submit</button>
 
+      <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
+        ツイート
+      </div>
       {tweets.map((tweet) => (
-        <div key={tweet.id}>
+        <div className="flex border-b border-solid border-grey-light" key={tweet.id} >
           <p>{tweet.id}</p>
           <p>{tweet.content}</p>
           <p>{tweet.createdAt}</p>
@@ -57,7 +60,7 @@ const Home: NextPage = () => {
         </div>
       ))
       }
-    </div >
+    </div>
   )
 }
 
