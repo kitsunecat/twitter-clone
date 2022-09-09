@@ -82,6 +82,7 @@ const Home: NextPage = () => {
             <div>
               <div className="mb-4">
                 <p>{tweet.content}</p>
+                <button className="bg-red-400 mt-5 hover:bg-red-600 text-white py-1 px-4 rounded-full float-right" onClick={() => deleteTweetHandler(tweet.id)}>delete</button>
               </div>
             </div>
           </div>
