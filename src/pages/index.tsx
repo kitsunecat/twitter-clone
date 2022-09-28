@@ -14,9 +14,31 @@ import { DataStore } from '@aws-amplify/datastore';
 import { Tweet } from '../models';
 import { detectContentType } from 'next/dist/server/image-optimizer';
 
+// NextAuth
+import { useSession, signIn, signOut } from "next-auth/react"
+
 const Home: NextPage = () => {
   const [tweets, setTweets] = useState<Tweet[]>([])
   const [newTweet, setNewTweet] = useState<string>("")
+  const { data: session } = useSession()
+
+  const SessionButton = () => {
+    if (session) {
+      return (
+        <>
+          Signed in as {session?.user?.email} <br />
+          <button onClick={() => signOut()}>Sign out</button>
+        </>
+      )
+    } else {
+      return (
+        <>
+          Not signed in <br />
+          <button onClick={() => signIn()}>Sign in</button>
+        </>
+      )
+    }
+  }
 
   const getTweets = async () => {
     const models = await DataStore.query(Tweet);
@@ -44,6 +66,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="w-3/5 border border-gray-600 h-auto  border-t-0">
+      <SessionButton />
       <div className="flex">
         <div className="flex-1 px-2 pt-2 mt-2">
           <textarea value={newTweet} onChange={(e) => setNewTweet(e.target.value)} className=" bg-transparent text-gray-400 font-medium text-lg w-full" placeholder="What's happening?"></textarea>
