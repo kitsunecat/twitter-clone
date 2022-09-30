@@ -51,9 +51,6 @@
           "appId": "d26lh2a4bqlgub",
           "type": "cicd"
         }
-      },
-      "auth": {
-        "twitterclone353fc1de": {}
       }
     }
   }
