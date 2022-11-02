@@ -40,11 +40,6 @@ const Home: NextPage = () => {
     }
   }
 
-  const getTweets = async () => {
-    const models = await DataStore.query(Tweet);
-    setTweets(models)
-  }
-
   const createTweetHandler = async () => {
     const tweet = await DataStore.save(
       new Tweet({ "content": newTweet })
@@ -61,7 +56,7 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
-    getTweets()
+    DataStore.query(Tweet).then(res => setTweets(res));
   }, [])
 
   return (
