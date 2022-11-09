@@ -2,7 +2,7 @@
 import type { NextPage } from 'next'
 
 // React
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // Amplify
 import { Amplify } from 'aws-amplify';
@@ -10,17 +10,34 @@ import awsconfig from '../aws-exports';
 Amplify.configure(awsconfig);
 
 // Amplify DataStore
-import { DataStore } from '@aws-amplify/datastore';
-import { Tweet } from '../models';
+import { DataStore, Predicates } from '@aws-amplify/datastore';
+import { User, Tweet } from '../models';
 import { detectContentType } from 'next/dist/server/image-optimizer';
 
 // NextAuth
 import { useSession, signIn, signOut } from "next-auth/react"
+import { setDefaultResultOrder } from 'dns';
 
 const Home: NextPage = () => {
   const [tweets, setTweets] = useState<Tweet[]>([])
   const [newTweet, setNewTweet] = useState<string>("")
+  const [user, setUser] = useState<User>()
   const { data: session } = useSession()
+
+  const getUser = useCallback(async () => {
+    if (session?.user?.email === undefined) return
+
+    const email = session?.user?.email || ''
+    let users = await DataStore.query(User, user => user.email("eq", email));
+    if (users.length > 0) {
+      setUser(users[0])
+    } else {
+      setUser(await DataStore.save(new User({ "email": email })))
+    }
+    console.log(user)
+    return user
+  }, [session?.user, user])
+
 
   const SessionButton = () => {
     if (session) {
@@ -41,8 +58,10 @@ const Home: NextPage = () => {
   }
 
   const createTweetHandler = async () => {
+    if (!user?.id) return
+
     const tweet = await DataStore.save(
-      new Tweet({ "content": newTweet })
+      new Tweet({ "content": newTweet, userID: user.id })
     );
     setNewTweet('')
     setTweets([...tweets, tweet])
@@ -56,8 +75,9 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
+    getUser()
     DataStore.query(Tweet).then(res => setTweets(res));
-  }, [])
+  }, [getUser])
 
   return (
     <div className="w-3/5 border border-gray-600 h-auto  border-t-0">
@@ -69,7 +89,7 @@ const Home: NextPage = () => {
       </div>
       <div className="flex">
         <div className="flex-1">
-          <button onClick={() => createTweetHandler()} className="bg-blue-400 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-8 rounded-full mr-8 float-right">
+          <button disabled={!user?.id} onClick={() => createTweetHandler()} className="bg-blue-400 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-8 rounded-full mr-8 float-right">
             Tweet
           </button>
         </div>
